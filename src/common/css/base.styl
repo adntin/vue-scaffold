@@ -1,0 +1,50 @@
+html, body
+  height: 100%
+body
+  font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+  overflow: auto;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+a
+  text-decoration: none
+
+.breadcrumb
+  margin-bottom: 20px;
+
+.query
+  margin: 20px 0;
+  padding-top: 25px;
+  background-color: #f2f2f2;
+  .el-input
+    width 150px
+    &.el-date-editor--daterange
+      width: 220px
+.table 
+  margin-top: 30px;
+.pagination
+  margin-top: 10px;
+  float: right;
+
+.box
+  border: 1px solid #eaeefb;
+  border-radius: 4px;
+  transition: .2s;
+  margin: 0 auto
+  margin-bottom: 20px
+  &:hover
+    box-shadow: 0 0 8px 0 rgba(232,237,250,.6),0 2px 4px 0 rgba(232,237,250,.5)
+  .box-header
+    padding: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    &::before
+      content: ''
+      border-left: 3px solid #20A0FF;
+      margin-right: 12px;
+    &+.box-body
+      border-top: 1px solid #eaeefb;
+    .el-icon-arrow-up, .el-icon-arrow-down
+      float: right;
+      padding: 2px;
+  .box-body
+    padding: 20px;

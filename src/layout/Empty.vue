@@ -1,5 +1,5 @@
 <template>
-  <div id="layout-empty" v-bind:style="setWidth">
+  <div class="layout-empty" v-bind:style="setWidth">
     <router-view class="container"></router-view>
   </div>
 </template>
@@ -25,9 +25,9 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-* {
-  margin: 0;
-  padding: 0;
-}
+<style lang="stylus">
+@import "../common/css/index.styl";
+
+.layout-empty
+  min-height: 100%;
 </style>

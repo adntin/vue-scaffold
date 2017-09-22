@@ -17,10 +17,29 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   if (err) throw err
   webpack(webpackConfig, function (err, stats) {
     spinner.stop()
-    if (err) throw err
+    // if (err) throw err
+    // 致命的 wepback 错误（配置出错等）
+    if (err) {
+      console.error(err.stack || err);
+      if (err.details) {
+        console.error(err.details);
+      }
+      return;
+    }
+
+    const info = stats.toJson();
+    // 编译错误（缺失的 module，语法错误等）
+    if (stats.hasErrors()) {
+      console.error(info.errors);
+    }
+    // 编译警告
+    if (stats.hasWarnings()) {
+      console.warn(info.warnings)
+    }
+
     process.stdout.write(stats.toString({
       colors: true,
-      modules: false,
+      modules: true,
       children: false,
       chunks: false,
       chunkModules: false

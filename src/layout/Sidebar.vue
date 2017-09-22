@@ -1,5 +1,5 @@
 <template>
-  <div id="layout-sidebar" v-bind:style="setWidth">
+  <div class="layout-sidebar" v-bind:style="setWidth">
     <router-view name="header"></router-view>
     <div class="container">
       <router-view name="sidebar"></router-view>
@@ -30,23 +30,19 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-* {
-  margin: 0;
-  padding: 0;
-}
-.header {
-  height: 100px;
-  border: 1px solid red;
-}
-.container {
-  display: flex;
-  border: 1px solid black;
-  overflow: hidden;
-}
-.footer {
-  height: 100px;
-  border: 1px solid red;
-  clear: both;  
-}
+<style lang="stylus">
+@import "../common/css/index.styl";
+
+.layout-sidebar
+  .header
+    height: 100px;
+    border: 1px solid red;
+  .container
+    display: flex;
+    border: 1px solid black;
+    overflow: hidden;
+  .footer
+    height: 100px;
+    border: 1px solid red;
+    clear: both;
 </style>

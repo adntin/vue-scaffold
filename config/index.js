@@ -8,7 +8,7 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    productionSourceMap: true,
+    productionSourceMap: false,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
     // Before setting to `true`, make sure to:
@@ -28,8 +28,20 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
+      '/boss/**': {
+        target: 'http://192.168.70.212:5555', 
+        changeOrigin: true,       
+      },
       '/elearning-account/**': {
         target: 'http://dev-ms.xm.duoxue:5555',
+        changeOrigin: true,
+        // logLevel: 'debug',
+        // onProxyReq(proxyReq, req, res) {
+        //   console.log(1)
+        // },
+        // onProxyRes(proxyRes, req, res) {
+        //   console.log(2)
+        // }
       },
       '/elearning-training/**': {
         target: 'http://dev-ms.xm.duoxue:5555',

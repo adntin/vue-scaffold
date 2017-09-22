@@ -10,6 +10,7 @@ const Password = () => import('@/components/Password')
 const Contact = () => import('@/components/Contact')
 const Login = () => import('@/components/Login')
 
+import putaway from './putaway'
 import basic from './basic'
 import user from './user'
 import help from './help'
@@ -43,7 +44,7 @@ const routes = [{
   path: '/login',
   name: 'Login',
   component: Login,
-  meta: { auth: false },
+  meta: { layout: 'empty', auth: false },
 }, {
   path: '/logout',
   beforeEnter (to, from, next) {
@@ -53,6 +54,7 @@ const routes = [{
   },
 }]
 
+routes.push(putaway)
 routes.push(basic)
 routes.push(user)
 routes.push(help)
@@ -64,23 +66,10 @@ routes.push(notFound)
 const router = new Router({
   mode: 'history',
   routes,
+  linkActiveClass: 'active'
 })
 
-const getUserInfo = (to, next) => {
-  axios.get('/elearning-account/account/getLoginInfo')
-  .then(function (response) {
-    sessionStorage.setItem('userinfo', JSON.stringify(response))
-    next()
-  })
-  .catch(function (error) {
-    alert(`获取用户信息失败：${error}`)
-    next({
-      path: '/login',
-      query: { redirect: to.fullPath }
-    })
-  })
-}
-
+// 判断登录
 router.beforeEach((to, from, next) => {
   if (to.query.ticket) {
     // 免登
@@ -114,6 +103,22 @@ router.beforeEach((to, from, next) => {
   // console.log(33)
 })
 
+const getUserInfo = (to, next) => {
+  // axios.get('/elearning-account/account/getLoginInfo')
+  axios.get('/boss/userinfo')
+  .then(function (response) {
+    sessionStorage.setItem('userinfo', JSON.stringify(response))
+    next()
+  })
+  .catch(function (error) {
+    alert(`获取用户信息失败：${error}`)
+    next({
+      path: '/login',
+      query: { redirect: to.fullPath }
+    })
+  })
+}
+
 // 拦截请求
 axios.interceptors.request.use(function (config) {
   config.headers.common.ticket = sessionStorage.getItem('ticket')
@@ -132,7 +137,17 @@ axios.interceptors.response.use(function (response) {
       return response
   }
 }, function (error) {
-  return Promise.reject(error)
+  switch (error.response.status) {
+    case 401:
+      alert(error.response.data.message) // 登录凭证已失效
+      router.replace({
+        path: '/login',
+        query: { redirect: router.currentRoute.fullPath }
+      })
+      return Promise.reject()
+    default:
+      return Promise.reject(error.response.data)
+  }
 })
 
 export default router
