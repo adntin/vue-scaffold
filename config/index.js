@@ -29,7 +29,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/boss/**': {
-        target: 'http://192.168.70.212:5555', 
+        target: 'http://pre-boss.91yong.com', 
         changeOrigin: true,       
       },
       '/elearning-account/**': {

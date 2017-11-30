@@ -1,5 +1,7 @@
 <template>
-  <component v-bind:is="layout" v-bind:width="width"></component>
+  <!-- <keep-alive> -->
+    <component v-bind:is="layout" v-bind:width="width"></component>
+  <!-- </keep-alive> -->
 </template>
 
 <script>
