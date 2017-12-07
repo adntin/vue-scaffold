@@ -16,9 +16,9 @@
           <el-option label="解决方案" value="series"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="讲师">
+      <!-- <el-form-item label="讲师">
         <el-input v-model="query.lecturer_name" placeholder="请输入"></el-input>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="上架时间">
         <el-date-picker
           v-model="query.daterange"
